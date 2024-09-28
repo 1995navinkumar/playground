@@ -1,0 +1,82 @@
+body {
+  font-family: sans-serif;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.tweet-container {
+  border: 1px solid #cfd9de;
+  padding: 12px;
+  border-radius: 16px;
+  background-color: #fff;
+  display: flex;
+  gap: 12px;
+  height: fit-content;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.thumbnail {
+  border-radius: 50%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.author {
+  margin-bottom: 2px;
+}
+
+.name {
+  margin-right: 4px;
+  color: #000;
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.metadata {
+  color: #71767b;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+.message {
+  color: #0f1419;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+.actions {
+  max-width: 425px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.action-count {
+  font-size: 13px;
+  color: #536471;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}

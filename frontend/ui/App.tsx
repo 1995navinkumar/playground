@@ -1,7 +1,14 @@
+import ProgressBar from "./components/ProgressBar";
+import TemperatureConverter from "./components/TemperatureConverter";
+import Tweet from "./components/Tweet";
+import "./components/style.css";
+
 export default function App() {
   return (
     <main>
-      <div>Hello</div>
+      <ProgressBar />
+      <TemperatureConverter />
+      <Tweet />
     </main>
   );
 }
