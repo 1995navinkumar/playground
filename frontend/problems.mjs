@@ -134,3 +134,48 @@ function sum(value) {
     }
   };
 }
+
+// Data Selection
+
+export function selectData(sessions, options = {}) {
+  const { user, minDuration = 0, equipment, merge = false } = options;
+
+  function getEquipment(a = [], b = []) {
+    const uniqueEq = new Set([...a, ...b]);
+    return Array.from(uniqueEq).sort();
+  }
+
+  if (merge) {
+    const groupByUser = sessions.reduce((a, c, index) => {
+      const userId = c.user;
+      if (userId in a) {
+        a[userId] = {
+          user: userId,
+          duration: a[userId].duration + c.duration,
+          equipment: getEquipment(a[userId].equipment, c.equipment),
+          index,
+        };
+      } else {
+        a[userId] = { ...c, index };
+      }
+      return a;
+    }, {});
+
+    const merged = Object.values(groupByUser)
+      .sort((a, b) => a.index - b.index)
+      .map(({ index, ...s }) => s);
+
+    return filter(merged);
+  } else {
+    return filter(sessions);
+  }
+
+  function filter(sess) {
+    return sess
+      .filter((s) => (user ? s.user === user : true))
+      .filter((s) => s.duration >= minDuration)
+      .filter((s) =>
+        equipment ? equipment.some((e) => s.equipment.includes(e)) : true
+      );
+  }
+}
