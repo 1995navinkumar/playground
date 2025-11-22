@@ -80,3 +80,43 @@ p {
   margin: 0;
   padding: 0;
 }
+
+.input-container {
+  position: relative;
+}
+
+.search-result-container {
+  position: absolute;
+  border: 1px solid #dedede;
+  width: 100%;
+  z-index: 100;
+  background: white;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.search-result-item {
+  border-bottom: 1px solid #dedede;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.search-result-item:hover {
+  background-color: #dedede;
+}
+
+.resize-container {
+  width: 240px;
+  height: 240px;
+  border: 1px solid #dedede;
+  position: relative;
+}
+
+.resize-controller {
+  position: absolute;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: red;
+  cursor: ew-resize;
+}

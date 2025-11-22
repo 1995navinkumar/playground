@@ -1,3 +1,5 @@
+import React from "react";
+
 const Comment = {
   name: "John Doe",
   metadata: ["@johndoe", "Dec25"],
