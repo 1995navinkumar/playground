@@ -1,20 +1,51 @@
-import React from "react";
-import AutoComplete from "./components/AutoComplete";
-import ProgressBar from "./components/ProgressBar";
-import TemperatureConverter from "./components/TemperatureConverter";
-import Tweet from "./components/Tweet";
 import "./components/style.css";
-import BoxResize from "./components/BoxResize";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemContent,
+} from "./components/Accordion";
 
 export default function App() {
   return (
     <main>
-      {/* <ProgressBar />
-      <TemperatureConverter />
-      <Tweet /> */}
-      {/* <AutoComplete /> */}
+      <Accordion>
+        <AccordionItem>
+          <AccordionItemTitle title="Title 1" />
+          <AccordionItemContent>
+            <div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+            </div>
+          </AccordionItemContent>
+        </AccordionItem>
 
-      <BoxResize />
+        <AccordionItem>
+          <AccordionItemTitle title="Title 1" />
+          <AccordionItemContent>
+            <div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+              <div>content</div>
+            </div>
+          </AccordionItemContent>
+        </AccordionItem>
+      </Accordion>
     </main>
   );
 }

@@ -1,11 +1,25 @@
-body {
-  font-family: sans-serif;
+@layer reset-css, utilities, component, overrides;
+
+@layer reset-css {
+  body {
+    font-family: sans-serif;
+  }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
 }
 
-main {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 64px;
+@layer utilities {
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .flex-1 {
+    flex: 1;
+  }
 }
 
 .tweet-container {
@@ -103,20 +117,4 @@ p {
 
 .search-result-item:hover {
   background-color: #dedede;
-}
-
-.resize-container {
-  width: 240px;
-  height: 240px;
-  border: 1px solid #dedede;
-  position: relative;
-}
-
-.resize-controller {
-  position: absolute;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background-color: red;
-  cursor: ew-resize;
 }

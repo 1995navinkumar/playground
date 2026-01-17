@@ -1,0 +1,17 @@
+@layer component {
+  .resize-container {
+    width: 240px;
+    height: 240px;
+    border: 1px solid #dedede;
+    position: relative;
+  }
+
+  .resize-controller {
+    position: absolute;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: red;
+    cursor: ew-resize;
+  }
+}

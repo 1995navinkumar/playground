@@ -1,12 +1,19 @@
 import React, { useEffect, useRef } from "react";
+import modcss from "./style.module.css";
+
+console.log(modcss);
 
 export default function BoxResize() {
   const containerRef = useRef(null);
   useEffect(() => {
     const element = containerRef.current;
     if (!element) return;
-    const resizeContainer = element.querySelector(".resize-container");
-    const resizeController = element.querySelector(".resize-controller");
+    const resizeContainer = element.querySelector(
+      `[data-name='resize-container']`
+    );
+    const resizeController = element.querySelector(
+      `[data-name='resize-controller']`
+    );
 
     let startX;
 
@@ -30,8 +37,11 @@ export default function BoxResize() {
   }, []);
   return (
     <div ref={containerRef}>
-      <div className="resize-container">
-        <div className="resize-controller"></div>
+      <div className={modcss["resize-container"]} data-name="resize-container">
+        <div
+          className={modcss["resize-controller"]}
+          data-name="resize-controller"
+        ></div>
       </div>
     </div>
   );
