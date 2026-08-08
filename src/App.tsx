@@ -1,47 +1,27 @@
 import styles from "./App.module.css";
-import {
-  TopNav,
-  TopNavActions,
-  TopNavBrand,
-  TopNavContent,
-} from "./components/ds/TopNav";
-import logoLight from "./assets/sknk-light-transparent.png";
-import logoDark from "./assets/sknk-dark-transparent.png";
-
-import { useColorScheme } from "./hooks/useColorScheme";
+import { AppHeader } from "@components/AppHeader";
+import { BrowserRouter, Routes, Route } from "react-router";
+import { AppFooter } from "@components/AppFooter";
+import { ComponentPlayground } from "./components/ComponentPlayground";
+import { AppLayout } from "./components/AppLayout";
+import { Home } from "./components/Home";
 
 function App() {
-  const theme = useColorScheme();
-
-  const logo = theme === "dark" ? logoLight : logoDark;
-
-  console.log(logo, theme);
-
   return (
-    <div className={styles.app}>
-      <header>
-        <TopNav>
-          <TopNavBrand>
-            <a href="#">
-              <img src={logo} />
-            </a>
-          </TopNavBrand>
-          {/* <TopNavContent>
-            <div>Content</div>
-          </TopNavContent>
-          <TopNavActions>
-            <div>Actionsss</div>
-          </TopNavActions> */}
-        </TopNav>
-      </header>
-      <section className={styles["main-section"]}>
-        <aside></aside>
-        <main className={styles.main}>
-          <div style={{ width: "10000px" }}>hi</div>
-        </main>
-      </section>
-      <footer>Footer</footer>
-    </div>
+    <BrowserRouter>
+      <div className={styles.app}>
+        <AppHeader />
+        <section>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route element={<AppLayout />}>
+              <Route path="component" element={<ComponentPlayground />} />
+            </Route>
+          </Routes>
+        </section>
+        <AppFooter />
+      </div>
+    </BrowserRouter>
   );
 }
 
