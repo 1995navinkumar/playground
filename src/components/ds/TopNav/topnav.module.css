@@ -1,0 +1,15 @@
+.topnav {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 4px;
+  background: var(--gray-100);
+}
+
+.topnav__brand {
+  width: 164px;
+  height: 52px;
+}
+
+.topnav__brand img {
+  height: 100%;
+}

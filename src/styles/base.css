@@ -7,8 +7,6 @@
     font-family: var(--font-sans);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background: var(--color-bg);
-    color: var(--color-text);
   }
 
   h1,
