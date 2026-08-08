@@ -1,10 +1,14 @@
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <>
-      <div>Hello</div>
-    </>
+    <div className={styles.app}>
+      <header>
+        <h2>Playground</h2>
+      </header>
+      <main></main>
+      <footer></footer>
+    </div>
   );
 }
 
