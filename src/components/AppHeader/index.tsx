@@ -27,7 +27,7 @@ export function AppHeader() {
         </TopNavBrand>
         <TopNavContent>
           <TopNavLink to={"/"}>Home</TopNavLink>
-          <TopNavLink to={"/component"}>UI Gallery</TopNavLink>
+          <TopNavLink to={"/ui-gallery"}>UI Gallery</TopNavLink>
         </TopNavContent>
         <TopNavActions>
           <button

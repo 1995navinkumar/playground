@@ -18,7 +18,7 @@ export function TopNavContent({ children }: { children: React.ReactNode }) {
 }
 
 export function TopNavActions({ children }: { children: React.JSX.Element }) {
-  return <div className={styles.active}>{children}</div>;
+  return <div className={styles.topnav__actions}>{children}</div>;
 }
 
 export function TopNavLink(props: TopNavLinkProps) {

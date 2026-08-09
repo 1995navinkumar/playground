@@ -1,4 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500&display=swap");
+
 @layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  body {
+    font-family: "Montserrat", sans-serif;
+  }
+
   html {
     height: 100%;
   }
