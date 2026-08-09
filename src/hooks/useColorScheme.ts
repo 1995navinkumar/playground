@@ -30,7 +30,7 @@ export function useColorScheme(): UseColorScheme {
   }, []);
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", colorScheme);
+    document.documentElement.setAttribute("data-theme", colorScheme);
     setCookie("color-scheme", colorScheme);
   }, [colorScheme]);
 
