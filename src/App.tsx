@@ -1,13 +1,13 @@
 import styles from "./App.module.css";
 import { AppHeader } from "@components/AppHeader";
-import { HashRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { AppFooter } from "@components/AppFooter";
 import { ComponentPlayground } from "./components/ComponentPlayground";
 import { Home } from "./components/Home";
 
 function App({ basePath }: { basePath: string }) {
   return (
-    <HashRouter basename={basePath}>
+    <BrowserRouter basename={basePath}>
       <div className={styles.app}>
         <AppHeader />
         <section>
@@ -18,7 +18,7 @@ function App({ basePath }: { basePath: string }) {
         </section>
         <AppFooter />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
