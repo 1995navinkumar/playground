@@ -5,9 +5,9 @@ import { AppFooter } from "@components/AppFooter";
 import { ComponentPlayground } from "./components/ComponentPlayground";
 import { Home } from "./components/Home";
 
-function App() {
+function App({ basePath }: { basePath: string }) {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basePath}>
       <div className={styles.app}>
         <AppHeader />
         <section>
