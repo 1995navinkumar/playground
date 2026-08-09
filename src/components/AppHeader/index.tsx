@@ -1,13 +1,22 @@
 import { useColorScheme } from "@hooks/useColorScheme";
 import logoLight from "@assets/sknk-light-transparent.png";
 import logoDark from "@assets/sknk-dark-transparent.png";
-import { TopNav, TopNavBrand } from "@ds/TopNav";
+import {
+  TopNav,
+  TopNavActions,
+  TopNavBrand,
+  TopNavContent,
+  TopNavLink,
+} from "@ds/TopNav";
 import styles from "./app-header.module.css";
+import { Moon, Sun } from "lucide-react";
 
 export function AppHeader() {
-  const theme = useColorScheme();
+  const { colorScheme, toggleColorScheme } = useColorScheme();
 
-  const logo = theme === "light" ? logoLight : logoDark;
+  const logo = colorScheme === "light" ? logoLight : logoDark;
+  const ColorSchemeIcon = colorScheme === "light" ? Sun : Moon;
+
   return (
     <header>
       <TopNav>
@@ -16,6 +25,18 @@ export function AppHeader() {
             <img className={styles.logo} src={logo} />
           </a>
         </TopNavBrand>
+        <TopNavContent>
+          <TopNavLink to={"/"}>Home</TopNavLink>
+          <TopNavLink to={"/component"}>UI Gallery</TopNavLink>
+        </TopNavContent>
+        <TopNavActions>
+          <button
+            style={{ background: "transparent", border: "none" }}
+            onClick={toggleColorScheme}
+          >
+            <ColorSchemeIcon />
+          </button>
+        </TopNavActions>
       </TopNav>
     </header>
   );

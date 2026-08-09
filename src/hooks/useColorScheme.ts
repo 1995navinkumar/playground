@@ -1,25 +1,46 @@
 import { useEffect, useState } from "react";
+import { getCookie, setCookie } from "typescript-cookie";
 
-export function useColorScheme(): "dark" | "light" {
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
+export type colorScheme = "dark" | "light";
+export type UseColorScheme = {
+  colorScheme: colorScheme;
+  setColorScheme: (color: colorScheme) => void;
+  toggleColorScheme: () => void;
+};
+
+export function useColorScheme(): UseColorScheme {
+  const [colorScheme, setColorScheme] = useState<"dark" | "light">(() => {
     const deviceScheme = window.matchMedia("(prefers-color-scheme: dark)")
       .matches
       ? "dark"
       : "light";
-    const dataThemeElement = document.querySelector(`[data-theme]`);
-    const appTheme = dataThemeElement?.getAttribute("data-theme");
-    return appTheme ? (appTheme === "light" ? "light" : "dark") : deviceScheme;
+
+    const preferredScheme = getCookie("color-scheme") as colorScheme;
+    return preferredScheme || deviceScheme;
   });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? "dark" : "light");
+      setColorScheme(e.matches ? "dark" : "light");
     };
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  return theme;
+  useEffect(() => {
+    document.body.setAttribute("data-theme", colorScheme);
+    setCookie("color-scheme", colorScheme);
+  }, [colorScheme]);
+
+  const toggleColorScheme = () => {
+    if (colorScheme === "light") {
+      setColorScheme("dark");
+    } else {
+      setColorScheme("light");
+    }
+  };
+
+  return { colorScheme, setColorScheme, toggleColorScheme };
 }

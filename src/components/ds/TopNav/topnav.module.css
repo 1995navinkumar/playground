@@ -4,9 +4,33 @@
   padding: 4px;
   box-shadow: var(--shadow-sm);
   background: var(--color-surface);
+  align-items: center;
 }
 
 .topnav__brand {
   width: 164px;
   height: 52px;
+}
+
+.topnav_content {
+  padding-inline: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.topnav__actions {
+  padding-inline: 8px;
+}
+
+.topnav__link {
+  padding: 8px 12px;
+}
+
+.topnav__link {
+  text-decoration: none;
+}
+
+.topnav__link--active {
+  border-bottom: 2px solid var(--color-action-active);
 }
