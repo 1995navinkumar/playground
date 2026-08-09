@@ -1,37 +1,195 @@
-@layer tokens {
-  :root {
-    color-scheme: light;
+/* ============================================================
+   TOKENS — primitives + semantic layer
+   Mode switching: light-dark() reacts to `color-scheme`.
+   - Default: follows system preference (light dark)
+   - Manual override: set data-theme="light" | "dark" on <html>
+   ============================================================ */
 
-    /* primitives */
-    --white: oklch(0.99 0 0);
-    --gray-900: oklch(0.22 0.01 260);
-    --gray-600: oklch(0.51 0.01 260);
-    --gray-100: oklch(0.95 0.005 260);
-    --brand: oklch(0.55 0.18 260);
-    --brand-strong: oklch(0.45 0.18 260);
+:root {
+  color-scheme: light dark;
+}
 
-    /* semantic — components use ONLY these */
-    --color-bg: light-dark(var(--white), var(--gray-900));
-    --color-text: light-dark(var(--gray-900), var(--gray-100));
-    --color-text-muted: var(--gray-600);
-    --color-accent: light-dark(var(--brand), var(--brand-strong));
+[data-theme="light"] {
+  color-scheme: light;
+}
 
-    --font-sans: system-ui, sans-serif;
-    --font-mono: ui-monospace, monospace;
+[data-theme="dark"] {
+  color-scheme: dark;
+}
 
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 1rem;
-    --space-4: 2rem;
+/* ------------------------------------------------------------
+   LAYER 1 — PRIMITIVES (mode-less, never used by components)
+   ------------------------------------------------------------ */
+:root {
+  /* neutral — parameterized ramp.
+     Two knobs control the whole family:
+     - hue: tint direction (260 = cool/slate-ish, 60 = warm/stone-ish)
+     - chroma: tint amount (0 = pure gray, keep ≤ 0.03)
+     Tune visually with palette-preview.html. */
+  --neutral-hue: 88.8;
+  --neutral-chroma: 0.0417;
 
-    --radius: 6px;
-  }
+  /* extremes carry half chroma — full tint over a whole viewport
+     (page bg) reads as a colored wash even when swatches look gray */
+  --neutral-50: oklch(
+    98.4% calc(var(--neutral-chroma) * 0.5) var(--neutral-hue)
+  );
+  --neutral-100: oklch(96.7% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-200: oklch(92.7% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-300: oklch(87.2% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-400: oklch(71.4% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-500: oklch(55.1% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-600: oklch(44.6% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-700: oklch(37.3% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-800: oklch(27.8% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-900: oklch(21% var(--neutral-chroma) var(--neutral-hue));
+  --neutral-950: oklch(
+    13% calc(var(--neutral-chroma) * 0.5) var(--neutral-hue)
+  );
 
-  /* manual theme override (e.g. a toggle setting <html data-theme="dark">) */
-  [data-theme="light"] {
-    color-scheme: light;
-  }
-  [data-theme="dark"] {
-    color-scheme: dark;
-  }
+  /* feedback — convention colors, not derivable from gray */
+  --red-50: #fef2f2;
+  --red-200: #fecaca;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-950: #450a0a;
+
+  --green-50: #f0fdf4;
+  --green-400: #4ade80;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-950: #052e16;
+
+  --amber-50: #fffbeb;
+  --amber-400: #fbbf24;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+  --amber-950: #451a03;
+
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* ------------------------------------------------------------
+   LAYER 2 — SEMANTIC (the only layer components reference)
+   light-dark(<light value>, <dark value>)
+   ------------------------------------------------------------ */
+:root {
+  /* backgrounds — app-shell mapping:
+     bg      = the main working/reading area. Brightest region in
+               light mode; content lives here.
+     surface = the chrome around it (topnav, sidenav, footer) and
+               secondary panels. Tinted, recedes behind content.
+     Always separate the two with --color-border; a 1-step color
+     difference without a border reads as a glitch. */
+  --color-bg: light-dark(var(--white), var(--neutral-950));
+  --color-surface: light-dark(var(--neutral-50), var(--neutral-900));
+  --color-surface-hover: light-dark(var(--neutral-200), var(--neutral-800));
+  --color-surface-active: light-dark(var(--neutral-300), var(--neutral-700));
+
+  /* text */
+  --color-text: light-dark(var(--neutral-900), var(--neutral-50));
+  --color-text-muted: light-dark(var(--neutral-500), var(--neutral-400));
+  --color-text-disabled: light-dark(var(--neutral-400), var(--neutral-600));
+  --color-text-on-action: light-dark(var(--white), var(--neutral-950));
+
+  /* borders */
+  --color-border: light-dark(var(--neutral-200), var(--neutral-800));
+  --color-border-strong: light-dark(var(--neutral-400), var(--neutral-600));
+
+  /* action — monochrome (gray-only palette).
+     To adopt a brand color later: swap these four to your
+     brand ramp (e.g. blue-600/700/800 + blue-50), nothing
+     else in the system changes. */
+  --color-action: light-dark(var(--neutral-900), var(--neutral-50));
+  --color-action-hover: light-dark(var(--neutral-700), var(--neutral-200));
+  --color-action-active: light-dark(var(--neutral-600), var(--neutral-300));
+  --color-action-subtle: light-dark(var(--neutral-200), var(--neutral-800));
+
+  /* feedback */
+  --color-danger: light-dark(var(--red-600), var(--red-200));
+  --color-danger-hover: light-dark(var(--red-700), var(--red-50));
+  --color-danger-subtle: light-dark(var(--red-50), var(--red-950));
+
+  --color-success: light-dark(var(--green-700), var(--green-400));
+  --color-success-subtle: light-dark(var(--green-50), var(--green-950));
+
+  --color-warning: light-dark(var(--amber-700), var(--amber-400));
+  --color-warning-subtle: light-dark(var(--amber-50), var(--amber-950));
+
+  /* elevation — light-dark() valid inside box-shadow values.
+     Dark mode: higher alpha; shadows barely read on dark surfaces. */
+  --shadow-sm: 0 1px 2px light-dark(rgb(0 0 0 / 0.06), rgb(0 0 0 / 0.4));
+  --shadow-md: 0 4px 12px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.5));
+  --shadow-lg: 0 12px 32px light-dark(rgb(0 0 0 / 0.14), rgb(0 0 0 / 0.6));
+}
+
+/* ------------------------------------------------------------
+   DIMENSIONS (mode-less)
+   ------------------------------------------------------------ */
+:root {
+  /* spacing — 4px grid, non-linear on purpose.
+     Rule: no raw px in padding/margin/gap; pick a step. */
+  --space-1: 0.25rem; /*  4px — icon-to-label gaps */
+  --space-2: 0.5rem; /*  8px — tight padding, chip insets */
+  --space-3: 0.75rem; /* 12px — input padding */
+  --space-4: 1rem; /* 16px — default card padding, gaps */
+  --space-6: 1.5rem; /* 24px — section padding */
+  --space-8: 2rem; /* 32px — between content blocks */
+  --space-12: 3rem; /* 48px — page sections */
+  --space-16: 4rem; /* 64px — hero/large separation */
+
+  /* radius — one knob, steps derive.
+     0 = sharp/technical, 12px = friendly/soft. */
+  --radius: 8px;
+  --radius-sm: calc(var(--radius) - 4px); /* checkboxes, tags */
+  --radius-md: var(--radius); /* buttons, inputs, cards */
+  --radius-lg: calc(var(--radius) + 4px); /* modals, large panels */
+  --radius-full: 9999px; /* pills, avatars */
+
+  /* border width */
+  --border-w: 1px;
+}
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY (mode-less)
+   ------------------------------------------------------------ */
+:root {
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, monospace;
+
+  --text-xs: 0.75rem; /* 12px — badges, legal */
+  --text-sm: 0.875rem; /* 14px — secondary text, table cells */
+  --text-base: 1rem; /* 16px — body */
+  --text-lg: 1.125rem; /* 18px — card titles */
+  --text-xl: 1.5rem; /* 24px — section headings */
+  --text-2xl: 2rem; /* 32px — page titles */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --leading-tight: 1.25; /* headings */
+  --leading-normal: 1.5; /* body */
+}
+
+/* ------------------------------------------------------------
+   Z-INDEX (mode-less) — ordered by "what must beat what"
+   ------------------------------------------------------------ */
+:root {
+  --z-sticky: 100; /* sticky headers, table headers */
+  --z-dropdown: 200; /* menus, popovers, tooltips */
+  --z-overlay: 300; /* modal backdrop */
+  --z-modal: 400; /* modal content, drawers */
+  --z-toast: 500; /* notifications — beat everything */
+}
+
+/* ------------------------------------------------------------
+   MOTION (mode-less)
+   ------------------------------------------------------------ */
+:root {
+  --duration-fast: 100ms; /* hovers, toggles */
+  --duration-base: 200ms; /* dropdowns, accordions */
+  --duration-slow: 300ms; /* modals, drawers */
+  --ease: cubic-bezier(0.2, 0, 0, 1); /* one easing everywhere */
 }

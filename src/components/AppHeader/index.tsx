@@ -7,7 +7,7 @@ import styles from "./app-header.module.css";
 export function AppHeader() {
   const theme = useColorScheme();
 
-  const logo = theme === "dark" ? logoLight : logoDark;
+  const logo = theme === "light" ? logoLight : logoDark;
   return (
     <header>
       <TopNav>

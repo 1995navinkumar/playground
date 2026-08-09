@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   padding: 4px;
-  background: var(--gray-100);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
 }
 
 .topnav__brand {

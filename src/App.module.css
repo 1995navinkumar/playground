@@ -6,15 +6,3 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
 }
-
-.main-section {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  min-height: 0;
-}
-
-.main {
-  overflow-y: scroll;
-  height: 100%;
-  width: 100%;
-}
