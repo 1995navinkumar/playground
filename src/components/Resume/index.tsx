@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./resume.module.css";
 import PagedHTML from "paged-html";
-import { data } from "./data";
+import { data, type ResumeData } from "./data";
 import { useReactToPrint } from "react-to-print";
 import type { PagedHTMLInstance } from "paged-html/build/types";
 import { Resume } from "./Resume";
@@ -41,7 +41,7 @@ export function ResumeGenerator() {
   );
 }
 
-function renderResume(root: HTMLElement, data: any) {
+function renderResume(root: HTMLElement, data: ResumeData) {
   const instance = PagedHTML.create({
     root,
     pageConfig: {

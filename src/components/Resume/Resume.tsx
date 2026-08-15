@@ -1,7 +1,8 @@
 import { Mail, MapPin, Phone, User } from "lucide-react";
 import styles from "./resume.module.css";
+import type { ResumeData, WorkExperience } from "./data";
 
-export function Resume({ data }) {
+export function Resume({ data }: { data: ResumeData }) {
   return (
     <div className={styles.resume}>
       <Intro data={data} />
@@ -29,7 +30,7 @@ export function Resume({ data }) {
   );
 }
 
-function Intro({ data }) {
+function Intro({ data }: { data: ResumeData }) {
   return (
     <div className={styles.resume__intro}>
       <h1 className={styles.intro__heading}>{data.name}</h1>
@@ -39,7 +40,7 @@ function Intro({ data }) {
   );
 }
 
-function Contact({ data }) {
+function Contact({ data }: { data: ResumeData }) {
   return (
     <div className={styles["resume__contact-container"]}>
       <div className={styles.resume__contact}>
@@ -70,7 +71,13 @@ function Contact({ data }) {
   );
 }
 
-function ContentSection({ title, children }) {
+function ContentSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.JSX.Element;
+}) {
   return (
     <div className={styles["content-section"]}>
       <h2>{title}</h2>
@@ -79,8 +86,14 @@ function ContentSection({ title, children }) {
   );
 }
 
-function WorkExperience({ data }) {
-  function WorkItem({ role, company, duration, domain, projects }) {
+function WorkExperience({ data }: { data: ResumeData }) {
+  function WorkItem({
+    role,
+    company,
+    duration,
+    domain,
+    projects,
+  }: WorkExperience) {
     return (
       <div className={styles["work-experience"]}>
         <h4 className={styles["work-experience__role"]}>{role}</h4>
@@ -116,7 +129,7 @@ function WorkExperience({ data }) {
   );
 }
 
-function Skills({ data }) {
+function Skills({ data }: { data: ResumeData }) {
   return (
     <div className={styles["skills-container"]}>
       {data.skills.map((skill) => (
@@ -128,7 +141,7 @@ function Skills({ data }) {
   );
 }
 
-function PersonalProjects({ data }) {
+function PersonalProjects({ data }: { data: ResumeData }) {
   return (
     <div className={styles["personal-projects-container"]}>
       {data.personalProjects.map((project) => (
@@ -138,7 +151,12 @@ function PersonalProjects({ data }) {
           </div>
           <ul className={styles["personal-project__list"]}>
             {project.description.map((item) => (
-              <li className={styles["personal-project__list-item"]}>{item}</li>
+              <li
+                key={item.slice(0, 5)}
+                className={styles["personal-project__list-item"]}
+              >
+                {item}
+              </li>
             ))}
           </ul>
         </div>
@@ -147,11 +165,11 @@ function PersonalProjects({ data }) {
   );
 }
 
-function Education({ data }) {
+function Education({ data }: { data: ResumeData }) {
   return (
     <div className={styles["education-container"]}>
       {data.education.map((item) => (
-        <div className={styles.education__list}>
+        <div key={item.degree} className={styles.education__list}>
           <div className={styles.education__degree}>
             {item.degree} ({item.duration})
           </div>
