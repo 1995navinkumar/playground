@@ -1,4 +1,47 @@
-export const data = {
+export type ResumeData = {
+  name: string;
+  role: string;
+  description: string;
+  contact: Contact;
+  workExperience: Array<WorkExperience>;
+  personalProjects: Array<PersonalProjects>;
+  skills: Array<string>;
+  education: Array<Education>;
+};
+
+type Contact = {
+  email: string;
+  phone: string;
+  linkedin: {
+    label: string;
+    href: string;
+  };
+  location: string;
+};
+
+export type WorkExperience = {
+  role: string;
+  company: string;
+  duration: string;
+  domain: string;
+  projects: Array<{ title: string; description: string }>;
+};
+
+type PersonalProjects = {
+  title: string;
+  duration: string;
+  description: Array<string>;
+};
+
+type Education = {
+  institution: string;
+  degree: string;
+  duration: string;
+  domain: string;
+  grade: string;
+};
+
+export const data: ResumeData = {
   name: "Navin Kumar C",
   role: "Lead Software Engineer",
   description:
@@ -42,6 +85,7 @@ export const data = {
       role: "Senior Frontend Engineer",
       company: "Razorpay",
       duration: "09/2022 - 09/2024",
+      domain: "",
       projects: [
         {
           title: "Developer Experience & Docs Platform",
@@ -66,6 +110,7 @@ export const data = {
       role: "Member Of Technical Staff",
       company: "Zoho Corporation",
       duration: "06/2017 - 09/2022",
+      domain: "SAAS",
       projects: [
         {
           title: "Vulnerability Manager Plus",
@@ -144,8 +189,7 @@ infrastructure changes to personal kubernetes cluster. Cluster is present in Dig
       grade: "CGPA: 8.1/10",
     },
     {
-      institution:
-        "G. Ramaswamy Naidu Metric Higher Secondary School",
+      institution: "G. Ramaswamy Naidu Metric Higher Secondary School",
       degree: "Higher Secondary Education",
       domain: "Computer Science",
       duration: "03/2011 - 03/2013",
