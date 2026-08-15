@@ -155,7 +155,7 @@
    TYPOGRAPHY (mode-less)
    ------------------------------------------------------------ */
 :root {
-  --font-sans: "Montserrat", sans-serif;
+  --font-sans: 'Inter', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   --text-xs: 0.75rem; /* 12px — badges, legal */

@@ -8,7 +8,7 @@ export function SideNav({ children }: { children: React.JSX.Element }) {
   return <aside className={styles.sidenav}>{children}</aside>;
 }
 
-export function SideNavContent({ children }: { children: React.JSX.Element }) {
+export function SideNavContent({ children }: { children: React.JSX.Element[] }) {
   return <nav className={styles.sidenav__content}>{children}</nav>;
 }
 
