@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: 254px minmax(0, 1fr);
   height: 100%;
+  padding-bottom : 40px;
 }
