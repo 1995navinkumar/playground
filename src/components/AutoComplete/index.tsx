@@ -124,7 +124,7 @@ function useAutoComplete(): UseAutoComplete {
       fetchAndCacheSearchResults();
     }
     setSelectedIndex(0);
-  }, [debouncedValue]);
+  }, [debouncedValue, cachedResults]);
 
   useEffect(() => {
     if (debouncedValue && debouncedValue in cachedResults) {
