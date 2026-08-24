@@ -1,24 +1,18 @@
 import styles from "./App.module.css";
 import { AppHeader } from "@components/AppHeader";
-import { HashRouter, Routes, Route } from "react-router";
-import { AppFooter } from "@components/AppFooter";
-import { ComponentPlayground } from "./components/ComponentPlayground";
-import { Home } from "./components/Home";
+import { Outlet } from "react-router";
+import { AppFooter } from "./components/AppFooter";
 
 function App() {
   return (
-    <HashRouter>
-      <div className={styles.app}>
-        <AppHeader />
-        <section>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="ui-gallery/*" element={<ComponentPlayground />} />
-          </Routes>
-        </section>
-        <AppFooter />
-      </div>
-    </HashRouter>
+    <div className={styles.app}>
+      <AppHeader />
+      <section>
+        <Outlet />
+      </section>
+      <AppFooter />
+      {/* <div id="side-drawer-root"></div> */}
+    </div>
   );
 }
 

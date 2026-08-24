@@ -4,6 +4,7 @@
   gap: 16px;
   padding: 16px;
   background-color: var(--color-surface);
+  width: var(--sidebar-width);
 }
 
 .sidenav__content {
@@ -12,16 +13,16 @@
   gap: 8px;
 }
 
-.sidenav__link {
-  padding: 8px;
-  border-radius: 8px;
-  text-decoration: none;
+.nav-item {
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
 }
-
-.sidenav__link:hover {
+.nav-item:hover {
   background: var(--color-surface-hover);
 }
-
-.sidenav__link--active {
-  background: var(--color-surface-active);
+.nav-item--active {
+  background: var(--color-primary-subtle);
+  color: var(--color-text-link);
+  font-weight: var(--weight-medium);
 }

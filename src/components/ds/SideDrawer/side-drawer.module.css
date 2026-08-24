@@ -1,0 +1,15 @@
+.side-drawer-container {
+  position: fixed;
+  height: 100dvh;
+  min-width: 70%;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  background: var(--color-surface);
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.side-drawer-visible {
+  transform: initial;
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 112" width="93" height="28" role="img" aria-label="sknk" style="display:block;flex:none">
+  <title>sknk — desktop nav lockup, 28px tall. Tile and wordmark take currentColor.</title>
+  <defs><mask id="sknkLock28" maskUnits="userSpaceOnUse" x="0" y="8" width="96" height="96">
+    <path d="M21 0 H75 A21 21 0 0 1 96 21 V75 A21 21 0 0 1 75 96 H21 A21 21 0 0 1 0 75 V21 A21 21 0 0 1 21 0 Z" transform="translate(0 8)" fill="#FFFFFF"></path>
+    <path d="M20 0 H33 L43 96 H30 Z" transform="translate(0 8)" fill="#000000"></path>
+    <path d="M63 0 H76 L66 96 H53 Z" transform="translate(0 8)" fill="#000000"></path>
+  </mask></defs>
+  <rect x="0" y="8" width="96" height="96" fill="currentColor" mask="url(#sknkLock28)"></rect>
+  <text x="132" y="86" font-family="Inter Tight, system-ui, -apple-system, sans-serif" font-size="96" font-weight="500" letter-spacing="-4.3" fill="currentColor">sknk</text>
+</svg>
