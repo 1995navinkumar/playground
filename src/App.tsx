@@ -11,7 +11,7 @@ function App() {
         <Outlet />
       </section>
       <AppFooter />
-      {/* <BottomNav /> */}
+      {/* <div id="side-drawer-root"></div> */}
     </div>
   );
 }

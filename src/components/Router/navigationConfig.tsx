@@ -17,7 +17,7 @@ export const navigationConfig: AppRouteObject[] = [
     },
   },
   {
-    path: "/ui-gallery/*",
+    path: "/ui-gallery",
     Component: ComponentPlayground,
     handle: {
       label: "UI Gallery",
@@ -30,7 +30,7 @@ export const navigationConfig: AppRouteObject[] = [
         element: <Navigate to={"auto-complete"} />,
       },
       {
-        path: "auto-complete",
+        path: "/ui-gallery/auto-complete",
         Component: AutoComplete,
         handle: {
           label: "Auto Complete",
@@ -38,7 +38,7 @@ export const navigationConfig: AppRouteObject[] = [
         },
       },
       {
-        path: "resume",
+        path: "/ui-gallery/resume",
         Component: ResumeGenerator,
         handle: {
           label: "Resume Generator",
