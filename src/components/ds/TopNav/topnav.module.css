@@ -30,7 +30,11 @@
 }
 
 .topnav__link--active {
-  border-bottom: 2px solid var(--color-text-link);
+  /* border-bottom: 2px solid var(--color-text-link); */
+  background-color: var(--color-primary-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-weight: var(--weight-medium);
 }
 
 @media (max-width: 767px) {
