@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "validate": "npm run lint && npm run build"
+    "validate": "npm run lint && npm run build",
+    "svgr": "npx @svgr/cli --config-file svgr.config.cjs src/assets/logo"
   },
   "dependencies": {
     "lucide-react": "^1.30.0",

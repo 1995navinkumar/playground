@@ -29,7 +29,7 @@ export function SideDrawer({
 
     document.addEventListener("click", listener);
     return () => document.removeEventListener("click", listener);
-  }, [open]);
+  }, [open, trigger, onClickOutside]);
 
   return (
     <div

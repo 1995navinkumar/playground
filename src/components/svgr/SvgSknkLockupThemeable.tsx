@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { SVGProps } from "react";
 const SvgSknkLockupThemeable = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -44,4 +43,3 @@ const SvgSknkLockupThemeable = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 export default SvgSknkLockupThemeable;
-
