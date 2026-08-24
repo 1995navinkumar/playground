@@ -1,7 +1,6 @@
 import styles from "./App.module.css";
 import { AppHeader } from "@components/AppHeader";
 import { HashRouter, Routes, Route } from "react-router";
-import { AppFooter } from "@components/AppFooter";
 import { ComponentPlayground } from "./components/ComponentPlayground";
 import { Home } from "./components/Home";
 
@@ -16,7 +15,7 @@ function App() {
             <Route path="ui-gallery/*" element={<ComponentPlayground />} />
           </Routes>
         </section>
-        <AppFooter />
+        {/* <BottomNav /> */}
       </div>
     </HashRouter>
   );

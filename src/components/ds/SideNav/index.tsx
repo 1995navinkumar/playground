@@ -17,7 +17,7 @@ export function SideNavLink(props: SideNavLinkProps) {
     <NavLink
       {...props}
       className={({ isActive }) =>
-        `${styles.sidenav__link} ${isActive ? styles["sidenav__link--active"] : ""}`
+        `${styles['nav-item']} ${isActive ? styles['nav-item--active'] : ""}`
       }
     />
   );

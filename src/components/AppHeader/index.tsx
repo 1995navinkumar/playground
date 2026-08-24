@@ -1,6 +1,5 @@
 import { useColorScheme } from "@hooks/useColorScheme";
-import logoLight from "@assets/sknk-light-transparent.png";
-import logoDark from "@assets/sknk-dark-transparent.png";
+
 import {
   TopNav,
   TopNavActions,
@@ -10,19 +9,23 @@ import {
 } from "@ds/TopNav";
 import styles from "./app-header.module.css";
 import { Moon, Sun } from "lucide-react";
+import { SknkLockup24, SknkLockup28 } from "../svgr";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function AppHeader() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
+  const isMobile = useIsMobile();
 
-  const logo = colorScheme === "light" ? logoLight : logoDark;
   const ColorSchemeIcon = colorScheme === "light" ? Sun : Moon;
+
+  const Logo = isMobile ? SknkLockup24 : SknkLockup28;
 
   return (
     <header>
       <TopNav>
         <TopNavBrand>
           <a href="/">
-            <img className={styles.logo} src={logo} />
+            <Logo className="logo" />
           </a>
         </TopNavBrand>
         <TopNavContent>
@@ -31,10 +34,10 @@ export function AppHeader() {
         </TopNavContent>
         <TopNavActions>
           <button
-            style={{ background: "transparent", border: "none" }}
+            className={`button-secondary ${styles["theme-switcher"]}`}
             onClick={toggleColorScheme}
           >
-            <ColorSchemeIcon />
+            <ColorSchemeIcon size={isMobile ? 16 : 18} />
           </button>
         </TopNavActions>
       </TopNav>

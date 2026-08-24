@@ -1,0 +1,345 @@
+/* ==========================================================================
+   sknk — tokens.css  (light-dark() edition)
+   Two layers.
+
+   Layer 1  PALETTE   raw colours, numbered. Higher number = darker.
+                      Never reference these in a component.
+   Layer 2  ROLES     every token says what it is FOR. Components use only these.
+                      Each role is declared ONCE, with light-dark(light, dark).
+
+   Rebrand = edit the --brand-* ramp in Layer 1. Nothing else changes.
+   Dark mode = light-dark() reads the element's color-scheme. :root is set to
+   "light dark", so the OS preference wins by default; [data-theme] overrides it.
+
+   Requires Chrome 123+, Safari 17.5+, Firefox 120+. If you need older browsers,
+   use tokens.css instead — same tokens, two explicit blocks.
+   ========================================================================== */
+
+/* ==========================================================================
+   LAYER 1 — PALETTE
+   ========================================================================== */
+
+:root {
+  /* --- Brand: pine. Swap this ramp to rebrand the whole site. -------------
+     50-200  tints, for filled backgrounds behind dark text
+     400-500 mid steps, used as the brand colour in DARK mode
+     600-800 deep steps, used as the brand colour in LIGHT mode           */
+  --brand-50: #e8f0eb; /* lightest tint — active nav item background (light) */
+  --brand-100: #cde4d8; /* tint — hover on a brand-tinted surface */
+  --brand-200: #a8d3be; /* tint — borders on brand-tinted surfaces */
+  --brand-400: #6fbf9a; /* light pine — links and focus ring in dark mode */
+  --brand-500: #2a9070; /* mid pine — button hover in dark mode */
+  --brand-600: #1e7a5f; /* button fill in dark mode, button hover in light */
+  --brand-700: #14664c; /* THE brand colour: buttons, logo tile, links (light) */
+  --brand-800: #0e4e3b; /* pressed state in light mode */
+  --brand-900: #0a3a2c; /* darkest — reserved, currently unused */
+
+  /* --- Neutral: bone to ink. Warm on purpose; never mix in a cool grey. --- */
+  --neutral-0: #ffffff; /* pure white — card surfaces in light mode */
+  --neutral-25: #fcfbf8; /* bone — the page background in light mode */
+  --neutral-50: #f5f2ec; /* warm paper — sunken bands, row hover */
+  --neutral-100: #ede9e0; /* paper, one step down — rarely needed */
+  --neutral-200: #e7e2d8; /* default 1px border in light mode */
+  --neutral-300: #cfc8ba; /* strong border in light mode, disabled text */
+  --neutral-350: #c6c0b4; /* secondary text in DARK mode */
+  --neutral-450: #8e887c; /* muted text in DARK mode */
+  --neutral-500: #8a8478; /* muted text in light mode: dates, labels, meta */
+  --neutral-600: #6e685e; /* disabled text on a dark fill */
+  --neutral-700: #4c4842; /* secondary text in light mode */
+  --neutral-750: #46433d; /* strong border in DARK mode */
+  --neutral-800: #2c2a26; /* default 1px border in dark mode, row hover (dark) */
+  --neutral-850: #1b1a18; /* card surface in dark mode */
+  --neutral-900: #121110; /* the page background in dark mode */
+  --neutral-950: #0c0b0a; /* sunken bands in dark mode */
+  --neutral-ink: #1a1917; /* body and heading text in light mode */
+
+  /* --- Status: success / warning / error -----------------------------------
+     -50  background fill        -200 border        -500 solid fill / icon
+     -700 text on the -50 fill                                             */
+  --green-50: #e7f5eb;
+  --green-200: #a8d8b9;
+  --green-500: #1e9e5a;
+  --green-700: #14713f;
+
+  --amber-50: #fdf3e2;
+  --amber-200: #ebc98d;
+  --amber-500: #c9821a;
+  --amber-700: #8f5b0e;
+
+  --clay-50: #fbeae7;
+  --clay-200: #e8b0a4;
+  --clay-500: #c2452f; /* destructive button fill, error field border */
+  --clay-700: #8e2e1e; /* error message text on the -50 fill */
+
+  /* --- Dark-mode-only steps ----------------------------------------------
+     Status colours cannot simply be reused on a dark page: the -50 tints go
+     white. These are the dark equivalents, deliberately desaturated.      */
+  --brand-dark-subtle: #16302a; /* active nav item background (dark) */
+
+  --green-dark-bg: #14261b;
+  --green-dark-border: #1e4a30;
+  --green-dark-text: #6fd597;
+
+  --amber-dark-bg: #2a2115;
+  --amber-dark-border: #4d3a18;
+  --amber-dark-text: #e0a94a;
+
+  --clay-dark-bg: #2a1a16;
+  --clay-dark-border: #4f2a21;
+  --clay-dark-text: #e88c76; /* error message text, error field border (dark) */
+
+  /* ======================================================================
+     TYPOGRAPHY
+     One family. Sizes are fixed px — no fluid clamp, so line lengths stay
+     predictable. Pick the size by role, not by how big it looks.
+     ====================================================================== */
+
+  --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-xs: 12px; /* badges, table meta. Not for anything you must read */
+  --text-sm: 14px; /* labels, help text, captions, nav items */
+  --text-base: 16px; /* body copy, inputs, buttons — the default */
+  --text-lg: 18px; /* card titles, list-item headings */
+  --text-xl: 20px; /* modal titles, section subheads */
+  --text-2xl: 24px; /* h3 — a heading inside a page */
+  --text-3xl: 30px; /* h2 — post titles, page subheads */
+  --text-4xl: 38px; /* h1 on mobile, article titles */
+  --text-5xl: 52px; /* the hero line. Once per page, desktop only */
+
+  --weight-regular: 400; /* body copy */
+  --weight-medium: 500; /* titles, buttons, active nav — the working weight */
+  --weight-semibold: 600; /* rare emphasis. Never a whole paragraph */
+
+  --leading-tight: 1.15; /* headings 24px and up */
+  --leading-normal: 1.5; /* UI text, labels, buttons */
+  --leading-relaxed: 1.65; /* long-form reading */
+
+  --tracking-tight: -0.02em; /* headings 24px and up */
+  --tracking-normal: 0; /* everything else */
+  --tracking-wide: 0.06em; /* ALL-CAPS eyebrow labels only */
+  --tracking-logo: -0.045em; /* the sknk wordmark. Nothing else */
+
+  /* ======================================================================
+     SPACING — 4px base. Multiply, never invent a value.
+     ====================================================================== */
+
+  --space-1: 4px; /* icon to its own label */
+  --space-2: 8px; /* label to input, chips in a row */
+  --space-3: 12px; /* button padding, gap between two buttons */
+  --space-4: 16px; /* padding inside a small card or list row */
+  --space-6: 24px; /* card padding, grid gap, page margin on mobile */
+  --space-8: 32px; /* between blocks inside one section */
+  --space-12: 48px; /* page margin on desktop, top-bar side padding */
+  --space-16: 64px; /* between sections on mobile */
+  --space-24: 96px; /* between sections on desktop */
+
+  /* ======================================================================
+     RADIUS
+     ====================================================================== */
+
+  --radius-sm: 6px; /* inputs, buttons, chips, small icon buttons */
+  --radius-md: 12px; /* cards, alerts, dropdown menus */
+  --radius-lg: 20px; /* modals, bottom sheets, large panels */
+  --radius-full: 999px; /* avatars, toggles, pills */
+
+  /* ======================================================================
+     ELEVATION — depth comes from borders. Only two shadows exist.
+     A card gets a border, not a shadow. If it needs both, it is a modal.
+     ====================================================================== */
+
+  --shadow-sm: 0 4px 12px rgba(26, 25, 23, 0.08); /* dropdowns, popovers */
+  --shadow-md: 0 12px 32px rgba(26, 25, 23, 0.1); /* modals, drawers */
+
+  /* ======================================================================
+     MOTION — short and flat. No bounce, no spring, no infinite loops.
+     ====================================================================== */
+
+  --duration-fast: 120ms; /* hover, focus, colour changes */
+  --duration-base: 200ms; /* dropdowns, tooltips, accordions */
+  --duration-slow: 300ms; /* drawers, modals, bottom sheets */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1); /* things entering */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* things leaving */
+
+  /* ======================================================================
+     LAYOUT — the few fixed measurements the shell depends on.
+     Breakpoints live in comments: CSS variables do not work inside
+     @media queries. Mobile layout below 960px, desktop at and above.
+     ====================================================================== */
+
+  --topbar-height: 64px; /* desktop */
+  --topbar-height-mobile: 56px;
+  --bottomnav-height: 64px; /* mobile L0 bar, plus the safe-area inset */
+  --sidebar-width: 260px; /* desktop L1 */
+  --drawer-width: 300px; /* mobile L1 */
+  --container-max: 1140px; /* body content column */
+  --measure: 68ch; /* max line length for long-form text */
+  --tap-target: 44px; /* minimum height of anything tappable */
+
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-overlay: 300; /* the scrim behind a drawer or modal */
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ==========================================================================
+   LAYER 2 — ROLES
+   One declaration per role: light-dark(light value, dark value).
+   Dark mode is not an inversion — the brand colour steps LIGHTER, the paper
+   stays warm, and borders stay quiet.
+   ========================================================================== */
+
+:root {
+  /* This line is what makes light-dark() work. Without a color-scheme,
+     every token silently falls back to its light value. */
+  color-scheme: light dark;
+
+  /* --- Surfaces ---------------------------------------------------------- */
+  --color-bg: light-dark(
+    var(--neutral-25),
+    var(--neutral-900)
+  ); /* the page. Set on body, forget it */
+  --color-bg-subtle: light-dark(
+    var(--neutral-50),
+    var(--neutral-950)
+  ); /* a band that sits back: footer, code block */
+  --color-surface: light-dark(
+    var(--neutral-0),
+    var(--neutral-850)
+  ); /* anything on top of the page: card, menu, modal, sidebar */
+  --color-surface-hover: light-dark(
+    var(--neutral-50),
+    var(--neutral-800)
+  ); /* hover on a row / menu item / nav link. Not on buttons */
+
+  /* --- Borders ----------------------------------------------------------- */
+  --color-border: light-dark(
+    var(--neutral-200),
+    var(--neutral-800)
+  ); /* default 1px line: card edge, divider, table rule */
+  --color-border-strong: light-dark(
+    var(--neutral-300),
+    var(--neutral-750)
+  ); /* a line you must see: input, secondary button, checkbox */
+  --color-border-focus: light-dark(
+    var(--brand-700),
+    var(--brand-400)
+  ); /* 2px focus ring, 2px offset, keyboard only */
+
+  /* --- Text ------------------------------------------------------------- */
+  --color-text: light-dark(
+    var(--neutral-ink),
+    var(--neutral-50)
+  ); /* headings and body — the default */
+  --color-text-secondary: light-dark(
+    var(--neutral-700),
+    var(--neutral-350)
+  ); /* the supporting sentence, card description */
+  --color-text-muted: light-dark(
+    var(--neutral-500),
+    var(--neutral-450)
+  ); /* dates, counts, field labels, placeholders */
+  --color-text-disabled: light-dark(
+    var(--neutral-300),
+    var(--neutral-700)
+  ); /* text in a disabled control. Nothing else */
+  --color-text-inverse: var(
+    --neutral-25
+  ); /* text on ANY filled colour — same in both modes */
+  --color-text-link: light-dark(
+    var(--brand-700),
+    var(--brand-400)
+  ); /* inline links, ghost buttons, active nav */
+  --color-text-link-hover: light-dark(var(--brand-800), var(--brand-200));
+
+  /* --- Primary action --------------------------------------------------- */
+  --color-primary: light-dark(
+    var(--brand-700),
+    var(--brand-600)
+  ); /* primary button fill, logo tile, selected toggle */
+  --color-primary-hover: light-dark(
+    var(--brand-600),
+    var(--brand-500)
+  ); /* :hover on a primary button */
+  --color-primary-active: light-dark(
+    var(--brand-800),
+    var(--brand-700)
+  ); /* :active — the moment of the click */
+  --color-primary-subtle: light-dark(
+    var(--brand-50),
+    var(--brand-dark-subtle)
+  ); /* background of the ACTIVE nav item, selected chip */
+  --color-primary-disabled: light-dark(
+    var(--neutral-200),
+    var(--neutral-800)
+  ); /* fill of a disabled primary button */
+
+  /* --- Status ------------------------------------------------------------
+     Same three parts every time: -bg fills the box, -border is its 1px edge,
+     -text colours the words and the icon. An alert component takes the
+     status as a prop and changes nothing else.                            */
+  --color-success-bg: light-dark(var(--green-50), var(--green-dark-bg));
+  --color-success-border: light-dark(
+    var(--green-200),
+    var(--green-dark-border)
+  );
+  --color-success-text: light-dark(
+    var(--green-700),
+    var(--green-dark-text)
+  ); /* saved, sent, copied, deployed */
+
+  --color-warning-bg: light-dark(var(--amber-50), var(--amber-dark-bg));
+  --color-warning-border: light-dark(
+    var(--amber-200),
+    var(--amber-dark-border)
+  );
+  --color-warning-text: light-dark(
+    var(--amber-700),
+    var(--amber-dark-text)
+  ); /* attention needed, nothing broke */
+
+  --color-error-bg: light-dark(var(--clay-50), var(--clay-dark-bg));
+  --color-error-border: light-dark(var(--clay-200), var(--clay-dark-border));
+  --color-error-text: light-dark(
+    var(--clay-700),
+    var(--clay-dark-text)
+  ); /* validation errors, failed requests */
+  --color-error-solid: var(
+    --clay-500
+  ); /* destructive button fill, error field border */
+
+  --color-info-bg: light-dark(var(--neutral-50), var(--neutral-850));
+  --color-info-border: light-dark(var(--neutral-300), var(--neutral-750));
+  --color-info-text: light-dark(
+    var(--neutral-700),
+    var(--neutral-350)
+  ); /* neutral notes and tips. Grey on purpose */
+
+  --color-logo: light-dark(var(--brand-700), var(--neutral-50));
+
+  /* --- Overlay ---------------------------------------------------------- */
+  --color-overlay: light-dark(
+    rgba(12, 11, 10, 0.45),
+    rgba(5, 5, 4, 0.62)
+  ); /* scrim behind a modal or drawer */
+}
+
+/* ==========================================================================
+   THEME OVERRIDE
+   light-dark() resolves against color-scheme, so the toggle sets nothing but
+   color-scheme — no second set of variables anywhere.
+
+     <html>                     follows the OS
+     <html data-theme="light">  forced light
+     <html data-theme="dark">   forced dark
+
+   Put the attribute on <html> before first paint to avoid a flash.
+   ========================================================================== */
+
+[data-theme="light"] {
+  color-scheme: only light;
+}
+[data-theme="dark"] {
+  color-scheme: only dark;
+}

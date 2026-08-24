@@ -26,21 +26,10 @@ export function TopNavLink(props: TopNavLinkProps) {
     <NavLink
       {...props}
       className={({ isActive }) =>
-        `${styles.topnav__link} ${isActive ? styles["topnav__link--active"] : ""}`
+        `${styles.topnav__link} ${
+          isActive ? styles["topnav__link--active"] : ""
+        }`
       }
     />
   );
 }
-
-/*
-
-<TopNav>
-    <TopNavBrand></TopNavBrand>
-    <TopNavContent></TopNavContent>
-    <TopNavActions></TopNavActions>
-</TopNav>
-
-
-
-
-*/
